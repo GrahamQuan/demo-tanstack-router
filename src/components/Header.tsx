@@ -7,6 +7,7 @@ export default function Header() {
         <div className="px-2 font-bold flex gap-3 items-center">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
+          <Link to="/posts">Posts</Link>
         </div>
       </nav>
     </header>
