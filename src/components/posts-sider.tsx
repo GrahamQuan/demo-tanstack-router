@@ -1,4 +1,4 @@
-import { postListQueryOptions } from '@/network/todos'
+import { postListQueryOptions } from '@/network/posts'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 

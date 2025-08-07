@@ -1,4 +1,4 @@
-import { postByIdQueryOptions } from '@/network/todos'
+import { postByIdQueryOptions } from '@/network/posts'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 export default function PostPage({ id }: { id: number }) {

@@ -1,5 +1,5 @@
 import PostPage from '@/components/post-page'
-import { postByIdQueryOptions } from '@/network/todos'
+import { postByIdQueryOptions } from '@/network/posts'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/posts/$id')({

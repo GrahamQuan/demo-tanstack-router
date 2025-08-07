@@ -1,4 +1,4 @@
-import { postListQueryOptions } from '@/network/todos'
+import { postListQueryOptions } from '@/network/posts'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import PostsSider from '@/components/posts-sider'
 import { Suspense } from 'react'
