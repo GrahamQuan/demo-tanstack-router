@@ -1,3 +1,4 @@
+import { NAV_ITEMS_LIST } from '@/constants/data'
 import { Link } from '@tanstack/react-router'
 
 export default function Header() {
@@ -5,9 +6,11 @@ export default function Header() {
     <header className="p-2 flex gap-2 bg-white text-black justify-between">
       <nav className="flex flex-row">
         <div className="px-2 font-bold flex gap-3 items-center">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/posts">Posts</Link>
+          {NAV_ITEMS_LIST.map((item) => (
+            <Link key={item.href} to={item.href}>
+              {item.title}
+            </Link>
+          ))}
         </div>
       </nav>
     </header>
