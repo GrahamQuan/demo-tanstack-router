@@ -5,6 +5,7 @@ import type { QueryClient } from '@tanstack/react-query'
 
 import Header from '../components/Header'
 import NotFound from '@/components/not-found'
+import TopLoadingBar from '@/components/top-loading-bar'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -16,6 +17,7 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   return (
     <>
+      <TopLoadingBar />
       <Header />
       <Outlet />
       <TanStackRouterDevtools />
