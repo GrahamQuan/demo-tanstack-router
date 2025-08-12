@@ -3,7 +3,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router'
 import PostsSider from '@/components/posts-sider'
 import { Suspense } from 'react'
 
-export const Route = createFileRoute('/posts')({
+export const Route = createFileRoute('/_with-footer/posts')({
   loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(postListQueryOptions),
   component: RouteComponent,

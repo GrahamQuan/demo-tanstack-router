@@ -2,7 +2,7 @@ import PostPage from '@/components/post-page'
 import { postByIdQueryOptions } from '@/network/posts'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/posts/$id')({
+export const Route = createFileRoute('/_with-footer/posts/$id')({
   loader: ({ context: { queryClient }, params: { id } }) =>
     queryClient.ensureQueryData(postByIdQueryOptions(Number(id))),
   component: RouteComponent,

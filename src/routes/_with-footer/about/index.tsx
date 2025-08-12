@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react'
 
 const LazyUI = lazy(() => import('@/components/lazy-ui'))
 
-export const Route = createFileRoute('/about/')({
+export const Route = createFileRoute('/_with-footer/about/')({
   component: Page,
 })
 

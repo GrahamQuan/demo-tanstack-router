@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/about')({
+export const Route = createFileRoute('/_with-footer/about')({
   component: RouteLayout,
 })
 

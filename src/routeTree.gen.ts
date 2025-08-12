@@ -9,22 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PostsRouteRouteImport } from './routes/posts/route'
-import { Route as AboutRouteRouteImport } from './routes/about/route'
+import { Route as WithFooterRouteImport } from './routes/_with-footer'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PostsIndexRouteImport } from './routes/posts/index'
-import { Route as AboutIndexRouteImport } from './routes/about/index'
-import { Route as PostsIdRouteImport } from './routes/posts/$id'
-import { Route as AboutIdRouteImport } from './routes/about/$id'
+import { Route as WithFooterPostsRouteRouteImport } from './routes/_with-footer/posts/route'
+import { Route as WithFooterAboutRouteRouteImport } from './routes/_with-footer/about/route'
+import { Route as WithFooterPostsIndexRouteImport } from './routes/_with-footer/posts/index'
+import { Route as WithFooterAboutIndexRouteImport } from './routes/_with-footer/about/index'
+import { Route as WithFooterPostsIdRouteImport } from './routes/_with-footer/posts/$id'
+import { Route as WithFooterAboutIdRouteImport } from './routes/_with-footer/about/$id'
 
-const PostsRouteRoute = PostsRouteRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRouteRoute = AboutRouteRouteImport.update({
-  id: '/about',
-  path: '/about',
+const WithFooterRoute = WithFooterRouteImport.update({
+  id: '/_with-footer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -32,52 +27,63 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PostsIndexRoute = PostsIndexRouteImport.update({
+const WithFooterPostsRouteRoute = WithFooterPostsRouteRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => WithFooterRoute,
+} as any)
+const WithFooterAboutRouteRoute = WithFooterAboutRouteRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => WithFooterRoute,
+} as any)
+const WithFooterPostsIndexRoute = WithFooterPostsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PostsRouteRoute,
+  getParentRoute: () => WithFooterPostsRouteRoute,
 } as any)
-const AboutIndexRoute = AboutIndexRouteImport.update({
+const WithFooterAboutIndexRoute = WithFooterAboutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AboutRouteRoute,
+  getParentRoute: () => WithFooterAboutRouteRoute,
 } as any)
-const PostsIdRoute = PostsIdRouteImport.update({
+const WithFooterPostsIdRoute = WithFooterPostsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
-  getParentRoute: () => PostsRouteRoute,
+  getParentRoute: () => WithFooterPostsRouteRoute,
 } as any)
-const AboutIdRoute = AboutIdRouteImport.update({
+const WithFooterAboutIdRoute = WithFooterAboutIdRouteImport.update({
   id: '/$id',
   path: '/$id',
-  getParentRoute: () => AboutRouteRoute,
+  getParentRoute: () => WithFooterAboutRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRouteRouteWithChildren
-  '/posts': typeof PostsRouteRouteWithChildren
-  '/about/$id': typeof AboutIdRoute
-  '/posts/$id': typeof PostsIdRoute
-  '/about/': typeof AboutIndexRoute
-  '/posts/': typeof PostsIndexRoute
+  '/about': typeof WithFooterAboutRouteRouteWithChildren
+  '/posts': typeof WithFooterPostsRouteRouteWithChildren
+  '/about/$id': typeof WithFooterAboutIdRoute
+  '/posts/$id': typeof WithFooterPostsIdRoute
+  '/about/': typeof WithFooterAboutIndexRoute
+  '/posts/': typeof WithFooterPostsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about/$id': typeof AboutIdRoute
-  '/posts/$id': typeof PostsIdRoute
-  '/about': typeof AboutIndexRoute
-  '/posts': typeof PostsIndexRoute
+  '/about/$id': typeof WithFooterAboutIdRoute
+  '/posts/$id': typeof WithFooterPostsIdRoute
+  '/about': typeof WithFooterAboutIndexRoute
+  '/posts': typeof WithFooterPostsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRouteRouteWithChildren
-  '/posts': typeof PostsRouteRouteWithChildren
-  '/about/$id': typeof AboutIdRoute
-  '/posts/$id': typeof PostsIdRoute
-  '/about/': typeof AboutIndexRoute
-  '/posts/': typeof PostsIndexRoute
+  '/_with-footer': typeof WithFooterRouteWithChildren
+  '/_with-footer/about': typeof WithFooterAboutRouteRouteWithChildren
+  '/_with-footer/posts': typeof WithFooterPostsRouteRouteWithChildren
+  '/_with-footer/about/$id': typeof WithFooterAboutIdRoute
+  '/_with-footer/posts/$id': typeof WithFooterPostsIdRoute
+  '/_with-footer/about/': typeof WithFooterAboutIndexRoute
+  '/_with-footer/posts/': typeof WithFooterPostsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -94,34 +100,27 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/about'
-    | '/posts'
-    | '/about/$id'
-    | '/posts/$id'
-    | '/about/'
-    | '/posts/'
+    | '/_with-footer'
+    | '/_with-footer/about'
+    | '/_with-footer/posts'
+    | '/_with-footer/about/$id'
+    | '/_with-footer/posts/$id'
+    | '/_with-footer/about/'
+    | '/_with-footer/posts/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRouteRoute: typeof AboutRouteRouteWithChildren
-  PostsRouteRoute: typeof PostsRouteRouteWithChildren
+  WithFooterRoute: typeof WithFooterRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteRouteImport
+    '/_with-footer': {
+      id: '/_with-footer'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof WithFooterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -131,69 +130,94 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/posts/': {
-      id: '/posts/'
+    '/_with-footer/posts': {
+      id: '/_with-footer/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof WithFooterPostsRouteRouteImport
+      parentRoute: typeof WithFooterRoute
+    }
+    '/_with-footer/about': {
+      id: '/_with-footer/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof WithFooterAboutRouteRouteImport
+      parentRoute: typeof WithFooterRoute
+    }
+    '/_with-footer/posts/': {
+      id: '/_with-footer/posts/'
       path: '/'
       fullPath: '/posts/'
-      preLoaderRoute: typeof PostsIndexRouteImport
-      parentRoute: typeof PostsRouteRoute
+      preLoaderRoute: typeof WithFooterPostsIndexRouteImport
+      parentRoute: typeof WithFooterPostsRouteRoute
     }
-    '/about/': {
-      id: '/about/'
+    '/_with-footer/about/': {
+      id: '/_with-footer/about/'
       path: '/'
       fullPath: '/about/'
-      preLoaderRoute: typeof AboutIndexRouteImport
-      parentRoute: typeof AboutRouteRoute
+      preLoaderRoute: typeof WithFooterAboutIndexRouteImport
+      parentRoute: typeof WithFooterAboutRouteRoute
     }
-    '/posts/$id': {
-      id: '/posts/$id'
+    '/_with-footer/posts/$id': {
+      id: '/_with-footer/posts/$id'
       path: '/$id'
       fullPath: '/posts/$id'
-      preLoaderRoute: typeof PostsIdRouteImport
-      parentRoute: typeof PostsRouteRoute
+      preLoaderRoute: typeof WithFooterPostsIdRouteImport
+      parentRoute: typeof WithFooterPostsRouteRoute
     }
-    '/about/$id': {
-      id: '/about/$id'
+    '/_with-footer/about/$id': {
+      id: '/_with-footer/about/$id'
       path: '/$id'
       fullPath: '/about/$id'
-      preLoaderRoute: typeof AboutIdRouteImport
-      parentRoute: typeof AboutRouteRoute
+      preLoaderRoute: typeof WithFooterAboutIdRouteImport
+      parentRoute: typeof WithFooterAboutRouteRoute
     }
   }
 }
 
-interface AboutRouteRouteChildren {
-  AboutIdRoute: typeof AboutIdRoute
-  AboutIndexRoute: typeof AboutIndexRoute
+interface WithFooterAboutRouteRouteChildren {
+  WithFooterAboutIdRoute: typeof WithFooterAboutIdRoute
+  WithFooterAboutIndexRoute: typeof WithFooterAboutIndexRoute
 }
 
-const AboutRouteRouteChildren: AboutRouteRouteChildren = {
-  AboutIdRoute: AboutIdRoute,
-  AboutIndexRoute: AboutIndexRoute,
+const WithFooterAboutRouteRouteChildren: WithFooterAboutRouteRouteChildren = {
+  WithFooterAboutIdRoute: WithFooterAboutIdRoute,
+  WithFooterAboutIndexRoute: WithFooterAboutIndexRoute,
 }
 
-const AboutRouteRouteWithChildren = AboutRouteRoute._addFileChildren(
-  AboutRouteRouteChildren,
-)
+const WithFooterAboutRouteRouteWithChildren =
+  WithFooterAboutRouteRoute._addFileChildren(WithFooterAboutRouteRouteChildren)
 
-interface PostsRouteRouteChildren {
-  PostsIdRoute: typeof PostsIdRoute
-  PostsIndexRoute: typeof PostsIndexRoute
+interface WithFooterPostsRouteRouteChildren {
+  WithFooterPostsIdRoute: typeof WithFooterPostsIdRoute
+  WithFooterPostsIndexRoute: typeof WithFooterPostsIndexRoute
 }
 
-const PostsRouteRouteChildren: PostsRouteRouteChildren = {
-  PostsIdRoute: PostsIdRoute,
-  PostsIndexRoute: PostsIndexRoute,
+const WithFooterPostsRouteRouteChildren: WithFooterPostsRouteRouteChildren = {
+  WithFooterPostsIdRoute: WithFooterPostsIdRoute,
+  WithFooterPostsIndexRoute: WithFooterPostsIndexRoute,
 }
 
-const PostsRouteRouteWithChildren = PostsRouteRoute._addFileChildren(
-  PostsRouteRouteChildren,
+const WithFooterPostsRouteRouteWithChildren =
+  WithFooterPostsRouteRoute._addFileChildren(WithFooterPostsRouteRouteChildren)
+
+interface WithFooterRouteChildren {
+  WithFooterAboutRouteRoute: typeof WithFooterAboutRouteRouteWithChildren
+  WithFooterPostsRouteRoute: typeof WithFooterPostsRouteRouteWithChildren
+}
+
+const WithFooterRouteChildren: WithFooterRouteChildren = {
+  WithFooterAboutRouteRoute: WithFooterAboutRouteRouteWithChildren,
+  WithFooterPostsRouteRoute: WithFooterPostsRouteRouteWithChildren,
+}
+
+const WithFooterRouteWithChildren = WithFooterRoute._addFileChildren(
+  WithFooterRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRouteRoute: AboutRouteRouteWithChildren,
-  PostsRouteRoute: PostsRouteRouteWithChildren,
+  WithFooterRoute: WithFooterRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

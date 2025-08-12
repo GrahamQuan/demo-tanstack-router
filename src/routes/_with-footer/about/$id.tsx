@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/about/$id')({
+export const Route = createFileRoute('/_with-footer/about/$id')({
   component: RouteComponent,
 })
 
